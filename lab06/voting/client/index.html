@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WebSocket OnLine Voting System</title>
+    <script>
+        var socket = new WebSocket("ws://localhost:3000/voting");// create WebSocket for URI: ws://localhost:3000
+        socket.onopen = function (event) {
+            console.log('WebSocket is open now.');
+        };
+        socket.onerror = function (error) {
+            console.log('WebSocket encountered an error:', error);
+        };
+
+        socket.onclose = function (event) {
+            console.log('WebSocket is closed now.');
+        };
+        socket.onmessage = onMessage;
+        function onMessage(event) {
+            //parse received message
+            //insert voting results into respective span elements
+            console.log('Received data:', event.data);
+            var data = JSON.parse(event.data);
+            console.log('Parsed data:', data);
+            document.getElementById("pizza").innerHTML = data.pizza;
+            document.getElementById("pasta").innerHTML = data.pasta;
+        }
+
+        function vote(value) {
+            // send value through WebSocket;
+            console.log('Sending data:', value)
+            if (socket.readyState == WebSocket.OPEN) {
+                socket.send(value.toLowerCase());
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h4>Current voting results</h4>
+    Pizza: <span id="pizza">0</span> Pasta: <span id="pasta">0</span>
+    <p>
+    <form id="addVoteForm">
+        <input type="button" value="Vote for Pizza!" onclick="vote('Pizza')">
+        <input type="button" value="Vote for Pasta!" onclick="vote('Pasta')">
+    </form>
+</body>
+
+</html>
