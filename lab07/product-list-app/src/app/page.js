@@ -1,7 +1,6 @@
 "use client";
 import ProductList from "./ProductList";
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
 import axios from "axios";
 import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProductDetail from "./ProductDetail";

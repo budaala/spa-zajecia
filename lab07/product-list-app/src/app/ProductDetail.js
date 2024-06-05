@@ -9,11 +9,14 @@ export default function ProductDetails({ products }) {
     return (
         <div>
             <h1>{product.title}</h1>
-            <p>{product.category} <br />
+            <p>
+                {product.category} <br />
                 {product.brand} <br />
                 {product.description}<br />
-                {product.price}</p>
+                {product.price}
+            </p>
             <img src={product.thumbnail} alt={product.title} />
+            <br />
             <Link to="/">Go back to ProductList</Link>
         </div>
     );
