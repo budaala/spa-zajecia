@@ -1,9 +1,11 @@
-// Zdefiniuj komponent ProductItem, który będzie generował element <li>, w takiej formie jak wcześniej w ramach renderowania ProductList. Wartości title i brand produktu powinny być przekazywane do komponentu ProductItem poprzez props. Ważne: Atrybut key należy ustawić w znaczniku ProductItem, a nie dopiero w <li> podczas jego renderowania. (Klucze elementów listy y musi ustawiać komponent nadrzędny w stosunku do elementów listy.)
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function ProductItem({ product, key }) {
     return (
         <li key={key}>
-            {product.title} ({product.brand})
+            {/* {product.title} ({product.brand}) */}
+            <Link to={`/details/${product.id}`}>{product.title} ({product.brand})</Link>
         </li>
     );
 }
