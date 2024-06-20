@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
+import { Student } from './entities/student.entity';
 
 @Injectable()
 export class StudentsService {
@@ -13,14 +14,27 @@ export class StudentsService {
     return idx;
   }
 
-  create(createStudentDto: CreateStudentDto) {
-    this.maxId++;
-    const newStudent = {
-      id: this.maxId,
-      ...createStudentDto,
+  // create(createStudentDto: CreateStudentDto) {
+  //   this.maxId++;
+  //   const newStudent = {
+  //     id: this.maxId,
+  //     ...createStudentDto,
+  //   };
+  //   this.students.push(newStudent);
+  //   return newStudent;
+  // }
+
+  create(createTodoDto: CreateStudentDto) {
+    let student: Student = {
+      id: ++this.maxId,
+      index: createTodoDto.index,
+      firstName: createTodoDto.firstName,
+      lastName: createTodoDto.lastName,
     };
-    this.students.push(newStudent);
-    return newStudent;
+
+    this.students.push(student);
+
+    return student;
   }
 
   findAll() {
@@ -67,16 +81,19 @@ export class StudentsService {
   onModuleInit() {
     this.students.push({
       id: ++this.maxId,
+      index: 32480,
       firstName: 'Łukasz',
       lastName: 'Kąśliwy',
     });
     this.students.push({
       id: ++this.maxId,
+      index: 32481,
       firstName: 'Marek',
       lastName: 'Nowak',
     });
     this.students.push({
       id: ++this.maxId,
+      index: 32482,
       firstName: 'Zenon',
       lastName: 'Zawada',
     });
